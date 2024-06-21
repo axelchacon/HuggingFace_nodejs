@@ -1,20 +1,20 @@
 import { HfInference } from "@huggingface/inference";
-//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
+import fs from "fs";
 
 const HF_TOKEN = "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";
-//const imageURL ="https://somosmuyperros.com/wp-content/uploads/2017/02/Miniatura_comportamiento17-1200x1012.jpg";
-const model = "Salesforce/blip-image-captioning-large";
+const hf = new HfInference(HF_TOKEN);
 
-const inferencehf = new HfInference(HF_TOKEN);
+async function reconocerImagen(rutaImagen) {
+	try {
+		const imagenBuffer = fs.readFileSync(rutaImagen);
+		const resultado = await hf.imageToText({
+			data: imagenBuffer,
+			model: "Salesforce/blip-image-captioning-large",
+		});
+		console.log("Descripción de la imagen:", resultado);
+	} catch (error) {
+		console.error("Error:", error);
+	}
+}
 
-// inferencehf.imageToText({
-// 	data: readFileSync("test/cats.png"),
-// 	model: "nlpconnect/vit-gpt2-image-captioning",
-// });
-
-const result = await inferencehf.imageToText({
-	data: readFileSync("perro_cat.jpeg"),
-	model: model,
-});
-
-console.log(result);
+reconocerImagen("perro_cat.jpeg");
