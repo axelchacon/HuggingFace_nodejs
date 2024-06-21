@@ -3,3 +3,7 @@
 # npm install @huggingface/inference
 
 # npm install dotenv
+
+#puedes guiarte de los modelos con models de Hugging Face
+
+# Puedes usar como referencia lo de tranlation y ImageToText es "https://www.npmjs.com/package/@huggingface/inference"
